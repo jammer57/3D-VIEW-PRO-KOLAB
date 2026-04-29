@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Prototype Showcase</title>
+    
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+        :root { 
+            --primary: #38bdf8; 
+            --dark: #0f172a; 
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body { 
+            margin: 0; 
+            background-color: var(--dark); 
+            color: white; 
+            font-family: sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+
+        .header { 
+            padding: 25px 20px; 
+            text-align: center; 
+        }
+
+        .header h1 { 
+            margin: 0; 
+            font-size: 1.4rem; 
+            color: var(--primary); 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Container Viewport 3D */
+        model-viewer { 
+            width: 100%; 
+            height: 65vh; 
+            background: radial-gradient(circle, #1e293b, #0f172a); 
+            --poster-color: transparent;
+        }
+
+        /* Kartu Komentar Aesthetic */
+        .comment-card { 
+            width: 90%; 
+            max-width: 450px; 
+            background: var(--glass); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 20px; 
+            padding: 25px; 
+            margin: -30px 0 50px 0; 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 5; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .input-box { 
+            width: 100%; 
+            background: rgba(0,0,0,0.3); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 12px; 
+            padding: 12px; 
+            color: white; 
+            margin-bottom: 15px; 
+            box-sizing: border-box; 
+            font-family: inherit;
+        }
+
+        .btn { 
+            width: 100%; 
+            background: var(--primary); 
+            color: var(--dark);
+            border: none; 
+            padding: 14px; 
+            border-radius: 12px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+
+        .btn:active { transform: scale(0.98); }
+
+        /* Tombol AR Bawaan Google */
+        #ar-button { 
+            background: white; 
+            border-radius: 30px; 
+            border: none; 
+            position: absolute; 
+            bottom: 60px; 
+            right: 20px; 
+            padding: 12px 20px; 
+            font-weight: bold; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>3D PROTOTYPE</h1>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">Swipe untuk putar • Pinch untuk zoom</p>
+    </div>
+
+    <model-viewer 
+        src="prokolabprototype2.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        auto-rotate 
+        shadow-intensity="1.5"
+        exposure="1"
+        environment-image="neutral">
+        
+        <button slot="ar-button" id="ar-button">
+            ✨ LIHAT AR
+        </button>
+    </model-viewer>
+
+    <div class="comment-card">
+        <h2 style="font-size: 1.1rem; margin-top: 0; font-weight: 400;">Beri Masukan</h2>
+        <form id="feedbackForm">
+            <input type="text" id="nama" class="input-box" placeholder="Nama kamu" required>
+            <textarea id="pesan" class="input-box" rows="3" placeholder="Tulis pendapatmu..." required></textarea>
+            <button type="submit" class="btn">Kirim Feedback</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nama = document.getElementById('nama').value;
+            alert('Mantap ' + nama + '! Feedback kamu sudah diterima (simulasi).');
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>S
